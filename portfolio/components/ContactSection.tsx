@@ -108,7 +108,7 @@ export default function ContactSection() {
                 transition={{ duration: 0.5, delay: 0.35, ease: EASE }}
               >
                 <MapPin size={12} />
-                <span className="text-xs tracking-wide">Sangli, Maharashtra · Open to remote</span>
+                <span className="text-xs tracking-wide">Kolhapur, Maharashtra · Open to remote</span>
               </motion.div>
             </div>
 

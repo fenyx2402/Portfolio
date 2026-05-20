@@ -113,7 +113,7 @@ export default function HeroSection() {
             style={{ color: "rgba(222,219,200,0.3)" }}
             {...fadeUp(0.8)}
           >
-            Based in Sangli, Maharashtra · Open to remote
+            Based in Kolhapur, Maharashtra · Open to remote
           </motion.p>
           <motion.div
             className="flex items-center gap-1"
