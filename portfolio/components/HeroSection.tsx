@@ -12,7 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#skills" },
+  { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
   { label: "Hire me", href: "mailto:powarakanksha9188@gmail.com" },

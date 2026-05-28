@@ -195,7 +195,7 @@ export default function FeaturedSection() {
         </div>
 
         {/* Projects list */}
-        <div className="mt-20 md:mt-28">
+        <div id="projects" className="mt-20 md:mt-28">
           <motion.p
             className="text-[10px] tracking-[0.25em] uppercase mb-10"
             style={{ color: "rgba(222,219,200,0.4)" }}
