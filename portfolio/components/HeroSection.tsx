@@ -1,214 +1,164 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { Globe, ArrowRight, Mail } from "lucide-react";
-
-function GithubIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
-    </svg>
-  );
-}
-
-function LinkedinIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import WordsPullUp from "./animations/WordsPullUp";
 
 const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260324_151826_c7218672-6e92-402c-9e45-f1e0f454bdc4.mp4";
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#skills" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+  { label: "Hire me", href: "mailto:powarakanksha9188@gmail.com" },
+];
 
 export default function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const fadingOutRef = useRef(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    let animFrame = 0;
-
-    const fade = (from: number, to: number, onDone?: () => void) => {
-      cancelAnimationFrame(animFrame);
-      const start = performance.now();
-      const tick = (now: number) => {
-        const t = Math.min((now - start) / 500, 1);
-        video.style.opacity = String(from + (to - from) * t);
-        if (t < 1) {
-          animFrame = requestAnimationFrame(tick);
-        } else {
-          onDone?.();
-        }
-      };
-      animFrame = requestAnimationFrame(tick);
-    };
-
-    const handleCanPlay = () => {
-      video.play().catch(() => {});
-      fade(0, 1);
-    };
-
-    const handleTimeUpdate = () => {
-      if (!video.duration) return;
-      const remaining = video.duration - video.currentTime;
-      if (remaining <= 0.55 && !fadingOutRef.current) {
-        fadingOutRef.current = true;
-        const current = parseFloat(video.style.opacity) || 1;
-        fade(current, 0);
-      }
-    };
-
-    const handleEnded = () => {
-      video.style.opacity = "0";
-      fadingOutRef.current = false;
-      setTimeout(() => {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-        fade(0, 1);
-      }, 100);
-    };
-
-    video.addEventListener("canplay", handleCanPlay);
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("ended", handleEnded);
-
-    return () => {
-      video.removeEventListener("canplay", handleCanPlay);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("ended", handleEnded);
-      cancelAnimationFrame(animFrame);
-    };
-  }, []);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen bg-black overflow-hidden relative flex flex-col">
-      {/* Background video */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover object-bottom"
-        style={{ opacity: 0 }}
-        muted
-        autoPlay
-        playsInline
-        preload="auto"
-        src={VIDEO_URL}
-      />
+    <section className="h-screen p-4 md:p-6 bg-black">
+      <div ref={ref} className="relative h-full rounded-2xl md:rounded-[2rem] overflow-hidden">
 
-      {/* Navbar */}
-      <div className="relative z-20 px-6 py-6">
-        <div className="liquid-glass rounded-full px-6 py-3 flex items-center justify-between max-w-5xl mx-auto">
-          <div className="flex items-center gap-2">
-            <span
-              className="text-white font-semibold text-lg"
-              style={{ fontFamily: "'Instrument Serif', serif" }}
-            >
-              AP
-            </span>
-            <div className="hidden md:flex items-center gap-8 ml-8">
-              {["About", "Projects", "Skills", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-white/80 hover:text-white text-sm font-medium transition-colors"
-                >
-                  {item}
-                </a>
+        {/* Background video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          src={VIDEO_URL}
+        />
+
+        {/* Noise overlay */}
+        <div className="noise-overlay absolute inset-0 opacity-[0.7] mix-blend-overlay pointer-events-none" />
+
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 pointer-events-none" />
+
+        {/* Navbar — centered pill hanging from top */}
+        <div className="absolute top-0 left-0 right-0 flex justify-center z-20">
+          <nav className="bg-black rounded-b-2xl md:rounded-b-3xl px-4 py-2 md:px-8 md:py-3">
+            <ul className="flex items-center gap-3 sm:gap-6 md:gap-12 lg:gap-14">
+              {navLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="text-[10px] sm:text-xs md:text-sm transition-colors whitespace-nowrap"
+                    style={{ color: "rgba(225,224,204,0.8)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225,224,204,0.8)")}
+                  >
+                    {label}
+                  </a>
+                </li>
               ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Bottom content — 12-column grid */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 px-4 md:px-8 pb-6 md:pb-10">
+          <div className="grid grid-cols-12 items-end gap-4">
+
+            {/* Left — giant name */}
+            <div className="col-span-12 lg:col-span-8">
+              <h1
+                className="font-medium leading-[0.85] tracking-[-0.07em]"
+                style={{ color: "#E1E0CC" }}
+              >
+                <span className="block text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16vw] xl:text-[15vw]">
+                  <WordsPullUp text="Akanksha" showAsterisk delay={0} />
+                </span>
+                <span
+                  className="block text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16vw] xl:text-[15vw]"
+                  style={{ color: "rgba(222,219,200,0.35)" }}
+                >
+                  <WordsPullUp text="Powar" delay={0.1} />
+                </span>
+              </h1>
+            </div>
+
+            {/* Right — description + CTA */}
+            <div className="col-span-12 lg:col-span-4 flex flex-col gap-5 lg:pb-3">
+              {/* Role tag */}
+              <motion.p
+                className="text-[10px] tracking-[0.2em] uppercase"
+                style={{ color: "rgba(222,219,200,0.45)" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+              >
+                Software Developer · Python · Full Stack
+              </motion.p>
+
+              {/* Description */}
+              <motion.p
+                className="text-xs sm:text-sm md:text-base"
+                style={{ color: "rgba(222,219,200,0.7)", lineHeight: 1.2 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+              >
+                Building scalable real-time systems — fintech platforms, market
+                data pipelines, and full-stack applications that move fast and
+                hold up under pressure.
+              </motion.p>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
+              >
+                <a
+                  href="#skills"
+                  className="group inline-flex items-center gap-2 hover:gap-3 rounded-full pl-5 pr-1 py-1 font-medium text-sm sm:text-base transition-all duration-300"
+                  style={{ background: "#DEDBC8", color: "#000" }}
+                >
+                  View my work
+                  <span
+                    className="rounded-full w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0"
+                    style={{ background: "#000" }}
+                  >
+                    <ArrowRight size={15} style={{ color: "#E1E0CC" }} />
+                  </span>
+                </a>
+              </motion.div>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/Akupowar2403"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-sm font-medium hidden md:block"
+
+          {/* Bottom meta row */}
+          <div className="mt-6 flex items-center justify-between">
+            <motion.p
+              className="text-[10px] tracking-widest uppercase"
+              style={{ color: "rgba(222,219,200,0.3)" }}
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.9, ease: EASE }}
             >
-              GitHub
-            </a>
-            <a
-              href="mailto:powarakanksha9188@gmail.com"
-              className="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium"
+              Based in Kolhapur, Maharashtra · Open to remote
+            </motion.p>
+            <motion.div
+              className="flex items-center gap-1.5"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 1.0, ease: EASE }}
             >
-              Contact
-            </a>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(222,219,200,0.3)" }}>
+                Available for hire
+              </span>
+            </motion.div>
           </div>
         </div>
-      </div>
 
-      {/* Hero content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12 text-center -translate-y-[20%]">
-        <p className="text-white/50 text-xs md:text-sm tracking-widest uppercase mb-6">
-          Software Developer · Python Backend · Full Stack
-        </p>
-        <h1
-          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white tracking-tight mb-8"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
-        >
-          Akanksha Powar
-        </h1>
-        <div className="max-w-xl w-full space-y-6">
-          <p className="text-white/70 text-sm md:text-base leading-relaxed px-4">
-            Building scalable real-time systems — fintech platforms, market data
-            pipelines, and full-stack applications that move fast and hold up
-            under pressure.
-          </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            <a
-              href="#projects"
-              className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors inline-flex items-center gap-2"
-            >
-              View my work <ArrowRight size={16} />
-            </a>
-            <a
-              href="mailto:powarakanksha9188@gmail.com"
-              className="bg-white rounded-full px-8 py-3 text-black text-sm font-medium hover:bg-white/90 transition-colors"
-            >
-              Get in touch
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Social icons */}
-      <div className="relative z-10 flex justify-center gap-4 pb-12">
-        <a
-          href="https://github.com/Akupowar2403"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
-        >
-          <GithubIcon size={20} />
-        </a>
-        <a
-          href="https://linkedin.com/in/akanksha-powar"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
-        >
-          <LinkedinIcon size={20} />
-        </a>
-        <a
-          href="mailto:powarakanksha9188@gmail.com"
-          aria-label="Email"
-          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
-        >
-          <Mail size={20} />
-        </a>
-        <a
-          href="https://portfolio.fenyxn.in"
-          aria-label="Website"
-          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
-        >
-          <Globe size={20} />
-        </a>
       </div>
     </section>
   );
