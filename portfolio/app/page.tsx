@@ -1,8 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import FeaturedVideoSection from "@/components/FeaturedVideoSection";
-import PhilosophySection from "@/components/PhilosophySection";
-import ServicesSection from "@/components/ServicesSection";
+import FeaturedSection from "@/components/FeaturedSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
@@ -10,9 +8,7 @@ export default function Home() {
     <main className="bg-black">
       <HeroSection />
       <AboutSection />
-      <FeaturedVideoSection />
-      <PhilosophySection />
-      <ServicesSection />
+      <FeaturedSection />
       <ContactSection />
     </main>
   );
