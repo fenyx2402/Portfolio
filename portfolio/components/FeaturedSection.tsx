@@ -25,30 +25,38 @@ const cards: FeatureCard[] = [
     title: "Python Backend.",
     icon: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85",
     items: [
-      "FastAPI · REST APIs · WebSockets",
-      "PostgreSQL · Redis · InfluxDB",
-      "JWT Auth · Keycloak · RBAC",
-      "10,000+ ticks/sec processing",
+      "FastAPI · WebSockets · REST APIs",
+      "Redis Pub/Sub · NumPy vectorized pipelines",
+      "InfluxDB v3 · PostgreSQL · Microservices",
+      "Message batching · Backpressure handling",
+      "Keycloak JWT auth · Token refresh logic",
+      "Multi-threading · Async event loops",
     ],
   },
   {
     number: "02",
-    title: "Full-Stack Apps.",
+    title: "Frontend & Charts.",
     icon: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85",
     items: [
       "Next.js · React · TypeScript",
       "TradingView Lightweight Charts",
+      "Candle · Smoothing · Volume · Spike charts",
       "Socket.IO · Event bus architecture",
+      "State managers · Dark/light theme system",
+      "Fully responsive mobile layouts",
     ],
   },
   {
     number: "03",
-    title: "Cloud & DevOps.",
+    title: "Fintech & Trading.",
     icon: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85",
     items: [
-      "AWS · CI/CD pipelines · Nginx",
-      "SSL · DNS · SSH deployment",
-      "Docker · Linux server management",
+      "Zerodha KiteTicker · Delta Exchange API",
+      "Supertrend · ATR · SMA · EMA · ZLMA",
+      "Space-Time Reversal Indicator (v1–v4)",
+      "Options chain · Auto strike selection",
+      "Forward testing · Live order execution",
+      "Telegram Bot · WhatsApp API integration",
     ],
   },
 ];
@@ -157,8 +165,8 @@ export default function FeaturedSection() {
             <WordsPullUpMultiStyle
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal leading-snug"
               segments={[
-                { text: "Production-grade systems for", style: { color: "#E1E0CC" } },
-                { text: "real-world scale.", style: { color: "#E1E0CC" } },
+                { text: "Real skills, built in", style: { color: "#E1E0CC" } },
+                { text: "production.", style: { color: "#E1E0CC" } },
               ]}
             />
           </motion.div>
@@ -168,7 +176,7 @@ export default function FeaturedSection() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Built for precision. Powered by Python and Next.js.
+            From 10,000+ ticks/sec pipelines to full-stack trading platforms.
           </motion.p>
         </div>
 
