@@ -106,7 +106,7 @@ export default function ProjectPage({ project }: { project: Project }) {
 
       {/* Highlights bar */}
       <section className="border-y px-6 md:px-10 py-0" style={{ borderColor: "rgba(222,219,200,0.07)", background: "#101010" }}>
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x" style={{ divideColor: "rgba(222,219,200,0.07)" }}>
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
           {[
             { label: "Status", value: project.status.charAt(0).toUpperCase() + project.status.slice(1) },
             ...project.highlights,
