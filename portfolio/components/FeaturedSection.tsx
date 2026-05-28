@@ -2,8 +2,10 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import WordsPullUpMultiStyle from "./animations/WordsPullUpMultiStyle";
+import { projects } from "@/lib/projects";
 
 const CARD_EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -64,17 +66,9 @@ function FeatureCard({ card, delay }: { card: FeatureCard; delay: number }) {
       animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.7, delay, ease: CARD_EASE }}
     >
-      {/* Top */}
       <div>
-        {/* Icon */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={card.icon}
-          alt=""
-          className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg mb-6 object-cover"
-        />
-
-        {/* Number + Title */}
+        <img src={card.icon} alt="" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg mb-6 object-cover" />
         <div className="flex items-start justify-between gap-2 mb-6">
           <h3 className="text-base sm:text-lg md:text-xl font-medium leading-snug" style={{ color: "#E1E0CC" }}>
             {card.title}
@@ -83,8 +77,6 @@ function FeatureCard({ card, delay }: { card: FeatureCard; delay: number }) {
             {card.number}
           </span>
         </div>
-
-        {/* Checklist */}
         <ul className="space-y-3">
           {card.items.map((item) => (
             <li key={item} className="flex items-start gap-2.5">
@@ -94,30 +86,63 @@ function FeatureCard({ card, delay }: { card: FeatureCard; delay: number }) {
           ))}
         </ul>
       </div>
-
-      {/* Learn more */}
-      <a
+      <Link
         href="#contact"
-        className="inline-flex items-center gap-1.5 mt-8 text-xs sm:text-sm font-medium transition-colors hover:opacity-80"
+        className="inline-flex items-center gap-1.5 mt-8 text-xs sm:text-sm font-medium transition-opacity hover:opacity-80"
         style={{ color: "rgba(222,219,200,0.6)" }}
       >
-        Learn more
-        <ArrowRight size={13} style={{ transform: "rotate(-45deg)" }} />
-      </a>
+        Learn more <ArrowRight size={13} style={{ transform: "rotate(-45deg)" }} />
+      </Link>
     </motion.div>
   );
 }
 
+const projectListItems = [
+  {
+    slug: "laboratory-management-system",
+    name: "Laboratory Management System",
+    stack: "Python · FastAPI · Next.js · PostgreSQL · Keycloak · WhatsApp API · Docker",
+    desc: "Production-deployed lab platform with patient tracking, automated WhatsApp notifications, and Keycloak RBAC on GCP.",
+    status: "live" as const,
+  },
+  {
+    slug: "trendedge",
+    name: "TrendEdge",
+    stack: "Python · FastAPI · Next.js · Socket.IO · Zerodha API · PostgreSQL",
+    desc: "Real-time trading platform — Supertrend signals, automated strike selection, sub-second data streaming at 2+ req/sec.",
+    status: "completed" as const,
+  },
+  {
+    slug: "spacetime",
+    name: "SpaceTime",
+    stack: "Python · FastAPI · Redis · InfluxDB · PostgreSQL · Microservices · TradingView",
+    desc: "Market data platform ingesting 10,000+ ticks/sec from DTN live feed via Redis Pub/Sub and multi-chart event bus.",
+    status: "completed" as const,
+  },
+  {
+    slug: "company-management-system",
+    name: "Company Management System",
+    stack: "Python · FastAPI · Next.js · Keycloak · PostgreSQL · FullCalendar",
+    desc: "Enterprise platform — project management, finance, invoicing, expense tracking, RBAC via Keycloak.",
+    status: "completed" as const,
+  },
+  {
+    slug: "delta-exchange-automation",
+    name: "Delta Exchange Automation",
+    stack: "Python · FastAPI · WebSockets · Telegram Bot · Delta Exchange API",
+    desc: "Multi-symbol automated trading system with real-time monitoring, signal processing, and Telegram alerts.",
+    status: "completed" as const,
+  },
+];
+
 export default function FeaturedSection() {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
-
   const videoRef = useRef(null);
   const videoInView = useInView(videoRef, { once: true, margin: "-100px" });
 
   return (
     <section id="skills" className="relative min-h-screen bg-black py-24 md:py-36 px-6 md:px-10 overflow-hidden">
-      {/* Subtle noise overlay */}
       <div className="bg-noise absolute inset-0 opacity-[0.15] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -132,14 +157,8 @@ export default function FeaturedSection() {
             <WordsPullUpMultiStyle
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal leading-snug"
               segments={[
-                {
-                  text: "Production-grade systems for",
-                  style: { color: "#E1E0CC" },
-                },
-                {
-                  text: "real-world scale.",
-                  style: { color: "#E1E0CC" },
-                },
+                { text: "Production-grade systems for", style: { color: "#E1E0CC" } },
+                { text: "real-world scale.", style: { color: "#E1E0CC" } },
               ]}
             />
           </motion.div>
@@ -155,8 +174,6 @@ export default function FeaturedSection() {
 
         {/* 4-card grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:h-[520px]">
-
-          {/* Card 1 — Video */}
           <motion.div
             ref={videoRef}
             className="rounded-2xl md:rounded-3xl overflow-hidden relative lg:col-span-1"
@@ -164,14 +181,7 @@ export default function FeaturedSection() {
             animate={videoInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, ease: CARD_EASE }}
           >
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-              src={VIDEO_URL}
-            />
+            <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline src={VIDEO_URL} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
               <p className="text-sm md:text-base font-medium" style={{ color: "#E1E0CC" }}>
@@ -179,12 +189,9 @@ export default function FeaturedSection() {
               </p>
             </div>
           </motion.div>
-
-          {/* Cards 2, 3, 4 */}
           {cards.map((card, i) => (
             <FeatureCard key={card.number} card={card} delay={(i + 1) * 0.15} />
           ))}
-
         </div>
 
         {/* Projects list */}
@@ -201,58 +208,49 @@ export default function FeaturedSection() {
           </motion.p>
 
           <div className="space-y-0">
-            {[
-              {
-                name: "TrendEdge",
-                stack: "Python · FastAPI · Next.js · Socket.IO · Zerodha API · PostgreSQL",
-                desc: "Real-time trading platform — Supertrend signals, automated strike selection, sub-second data streaming at 2+ req/sec.",
-              },
-              {
-                name: "SpaceTime",
-                stack: "Python · FastAPI · Redis · InfluxDB · PostgreSQL · Microservices · TradingView",
-                desc: "Market data platform ingesting 10,000+ ticks/sec from DTN live feed via Redis Pub/Sub and multi-chart event bus.",
-              },
-              {
-                name: "Company Management System",
-                stack: "Python · FastAPI · Next.js · Keycloak · PostgreSQL · FullCalendar",
-                desc: "Enterprise platform — project management, finance, invoicing, expense tracking, RBAC via Keycloak.",
-              },
-              {
-                name: "Delta Exchange Automation",
-                stack: "Python · FastAPI · WebSockets · Telegram Bot · Delta Exchange API",
-                desc: "Multi-symbol automated trading system with real-time monitoring, signal processing, and Telegram alerts.",
-              },
-            ].map((project, i) => (
+            {projectListItems.map((project, i) => (
               <motion.div
-                key={project.name}
-                className="group flex flex-col md:flex-row md:items-center justify-between py-7 border-t"
-                style={{ borderColor: "rgba(222,219,200,0.07)" }}
+                key={project.slug}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="flex items-start gap-6">
-                  <span className="text-[11px] tracking-widest mt-1 shrink-0 tabular-nums" style={{ color: "rgba(222,219,200,0.2)" }}>
-                    0{i + 1}
-                  </span>
-                  <div>
-                    <h4 className="text-base md:text-lg font-medium mb-1 transition-colors" style={{ color: "#E1E0CC" }}>
-                      {project.name}
-                    </h4>
-                    <p className="text-[10px] sm:text-xs tracking-wide mb-2" style={{ color: "rgba(222,219,200,0.3)" }}>
-                      {project.stack}
-                    </p>
-                    <p className="text-xs sm:text-sm leading-relaxed max-w-lg text-gray-500">
-                      {project.desc}
-                    </p>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="group flex flex-col md:flex-row md:items-center justify-between py-7 border-t transition-colors"
+                  style={{ borderColor: "rgba(222,219,200,0.07)" }}
+                >
+                  <div className="flex items-start gap-6">
+                    <span className="text-[11px] tracking-widest mt-1 shrink-0 tabular-nums" style={{ color: "rgba(222,219,200,0.2)" }}>
+                      0{i + 1}
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-3 mb-1">
+                        <h4 className="text-base md:text-lg font-medium group-hover:opacity-70 transition-opacity" style={{ color: "#E1E0CC" }}>
+                          {project.name}
+                        </h4>
+                        {project.status === "live" && (
+                          <span className="inline-flex items-center gap-1.5 text-[10px] tracking-widest uppercase" style={{ color: "#4ade80" }}>
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                            Live
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[10px] sm:text-xs tracking-wide mb-2" style={{ color: "rgba(222,219,200,0.3)" }}>
+                        {project.stack}
+                      </p>
+                      <p className="text-xs sm:text-sm leading-relaxed max-w-lg text-gray-500">
+                        {project.desc}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <ArrowRight
-                  size={18}
-                  className="mt-4 md:mt-0 shrink-0 transition-opacity"
-                  style={{ color: "rgba(222,219,200,0.2)", transform: "rotate(-45deg)" }}
-                />
+                  <ArrowUpRight
+                    size={18}
+                    className="mt-4 md:mt-0 shrink-0 opacity-20 group-hover:opacity-60 transition-opacity"
+                    style={{ color: "#E1E0CC" }}
+                  />
+                </Link>
               </motion.div>
             ))}
           </div>
