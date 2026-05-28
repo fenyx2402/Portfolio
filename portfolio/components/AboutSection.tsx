@@ -79,7 +79,7 @@ export default function AboutSection() {
           >
             {[
               { value: "10+", label: "Months experience" },
-              { value: "4", label: "Production projects" },
+              { value: "5+", label: "Production projects" },
               { value: "8.14", label: "B.Tech CGPA" },
               { value: "10K+", label: "Ticks per second" },
             ].map((stat, i) => (
