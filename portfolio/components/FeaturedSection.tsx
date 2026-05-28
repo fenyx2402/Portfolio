@@ -42,8 +42,9 @@ const cards: FeatureCard[] = [
       "TradingView Lightweight Charts",
       "Candle · Smoothing · Volume · Spike charts",
       "Socket.IO · Event bus architecture",
-      "State managers · Dark/light theme system",
-      "Fully responsive mobile layouts",
+      "Electron — cross-platform desktop apps",
+      "Email automation · State managers",
+      "Dark/light theme system · Mobile responsive",
     ],
   },
   {

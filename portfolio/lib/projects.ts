@@ -256,11 +256,11 @@ export const projects: Project[] = [
     status: "completed",
     stack: [
       "Python", "FastAPI", "Next.js", "TypeScript",
-      "PostgreSQL", "Keycloak", "JWT", "Google OAuth",
-      "PDF Canvas", "FullCalendar", "REST API",
+      "Electron", "PostgreSQL", "Keycloak", "JWT", "Google OAuth",
+      "PDF Canvas", "FullCalendar", "Email Automation", "REST API",
     ],
     description:
-      "A comprehensive company management system built for internal operations — covering project and task management, client and developer invoicing with PDF generation, GST/LUT billing for Indian and foreign clients, employee management with salary slips, finance reports, and expense tracking. Secured with Keycloak including Google login, role-based access, and group-based permissions.",
+      "A comprehensive company management system built for internal operations — covering project and task management, client and developer invoicing with PDF generation, GST/LUT billing for Indian and foreign clients, employee management with salary slips, finance reports, expense tracking, and automated email workflows. Also packaged as a cross-platform desktop application using Electron. Secured with Keycloak including Google login, role-based access, and group-based permissions.",
     problem:
       "An enterprise company managing multiple projects, clients, freelancers, and internal employees across invoicing, payments, and reporting relied on disconnected spreadsheets — with no unified system for project tracking, billing, or financial reporting.",
     solution:
@@ -320,9 +320,19 @@ export const projects: Project[] = [
           "Fully responsive mobile layout with hamburger sidebar across all pages",
         ],
       },
+      {
+        title: "Desktop App & Email Automation",
+        items: [
+          "Packaged as a cross-platform desktop application using Electron",
+          "Native desktop experience with full feature parity to the web app",
+          "Automated email workflows for client and internal communications",
+          "Email notifications triggered on invoice creation, project updates, and task assignments",
+          "Configurable email templates for different business events",
+        ],
+      },
     ],
     architecture:
-      "FastAPI backend with domain-separated routers: projects, tasks, finance, invoices, employees, freelancers, clients, reports. Keycloak provides SSO with Google login and JWT-based group permissions. Next.js frontend uses typed REST contracts for all API interactions. PDF generation happens server-side with HTML templates. PostgreSQL stores all relational business data with auto-calculated fields and cascading relations.",
+      "FastAPI backend with domain-separated routers: projects, tasks, finance, invoices, employees, freelancers, clients, reports. Keycloak provides SSO with Google login and JWT-based group permissions. Next.js frontend uses typed REST contracts for all API interactions. Electron wraps the Next.js app into a cross-platform desktop application. PDF generation happens server-side with HTML templates. Email automation runs as a background service. PostgreSQL stores all relational business data with auto-calculated fields and cascading relations.",
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
   },
