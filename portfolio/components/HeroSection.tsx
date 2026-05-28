@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { Globe, ArrowRight, Camera, Share2 } from "lucide-react";
+import { Globe, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4";
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260324_151826_c7218672-6e92-402c-9e45-f1e0f454bdc4.mp4";
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -86,13 +86,17 @@ export default function HeroSection() {
       <div className="relative z-20 px-6 py-6">
         <div className="liquid-glass rounded-full px-6 py-3 flex items-center justify-between max-w-5xl mx-auto">
           <div className="flex items-center gap-2">
-            <Globe size={24} className="text-white" />
-            <span className="text-white font-semibold text-lg">Asme</span>
+            <span
+              className="text-white font-semibold text-lg"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
+            >
+              AP
+            </span>
             <div className="hidden md:flex items-center gap-8 ml-8">
-              {["Features", "Pricing", "About"].map((item) => (
+              {["About", "Projects", "Skills", "Contact"].map((item) => (
                 <a
                   key={item}
-                  href="#"
+                  href={`#${item.toLowerCase()}`}
                   className="text-white/80 hover:text-white text-sm font-medium transition-colors"
                 >
                   {item}
@@ -101,65 +105,92 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button className="text-white text-sm font-medium">Sign Up</button>
-            <button className="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium">
-              Login
-            </button>
+            <a
+              href="https://github.com/Akupowar2403"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-sm font-medium hidden md:block"
+            >
+              GitHub
+            </a>
+            <a
+              href="mailto:powarakanksha9188@gmail.com"
+              className="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>
 
       {/* Hero content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12 text-center -translate-y-[20%]">
+        <p className="text-white/50 text-xs md:text-sm tracking-widest uppercase mb-6">
+          Software Developer · Python Backend · Full Stack
+        </p>
         <h1
-          className="text-7xl md:text-8xl lg:text-9xl text-white tracking-tight whitespace-nowrap mb-8"
+          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white tracking-tight mb-8"
           style={{ fontFamily: "'Instrument Serif', serif" }}
         >
-          Know it then <em className="italic">all</em>.
+          Akanksha Powar
         </h1>
-        <div className="max-w-xl w-full space-y-4">
-          <div className="liquid-glass rounded-full pl-6 pr-2 py-2 flex items-center gap-3">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 bg-transparent text-white placeholder:text-white/40 text-base outline-none"
-            />
-            <button className="bg-white rounded-full p-3 text-black shrink-0">
-              <ArrowRight size={20} />
-            </button>
-          </div>
-          <p className="text-white text-sm leading-relaxed px-4">
-            Stay updated with the latest news and insights. Subscribe to our
-            newsletter today and never miss out on exciting updates.
+        <div className="max-w-xl w-full space-y-6">
+          <p className="text-white/70 text-sm md:text-base leading-relaxed px-4">
+            Building scalable real-time systems — fintech platforms, market data
+            pipelines, and full-stack applications that move fast and hold up
+            under pressure.
           </p>
-          <div className="flex justify-center">
-            <button className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors">
-              Read the manifesto
-            </button>
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <a
+              href="#projects"
+              className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors inline-flex items-center gap-2"
+            >
+              View my work <ArrowRight size={16} />
+            </a>
+            <a
+              href="mailto:powarakanksha9188@gmail.com"
+              className="bg-white rounded-full px-8 py-3 text-black text-sm font-medium hover:bg-white/90 transition-colors"
+            >
+              Get in touch
+            </a>
           </div>
         </div>
       </div>
 
       {/* Social icons */}
       <div className="relative z-10 flex justify-center gap-4 pb-12">
-        <button
-          aria-label="Instagram"
+        <a
+          href="https://github.com/Akupowar2403"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
           className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
         >
-          <Camera size={20} />
-        </button>
-        <button
-          aria-label="Twitter"
+          <Github size={20} />
+        </a>
+        <a
+          href="https://linkedin.com/in/akanksha-powar"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
           className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
         >
-          <Share2 size={20} />
-        </button>
-        <button
-          aria-label="Globe"
+          <Linkedin size={20} />
+        </a>
+        <a
+          href="mailto:powarakanksha9188@gmail.com"
+          aria-label="Email"
+          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
+        >
+          <Mail size={20} />
+        </a>
+        <a
+          href="https://portfolio.fenyxn.in"
+          aria-label="Website"
           className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
         >
           <Globe size={20} />
-        </button>
+        </a>
       </div>
     </section>
   );

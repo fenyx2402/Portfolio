@@ -8,18 +8,20 @@ const cards = [
   {
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
-    tag: "Strategy",
-    title: "Research & Insight",
+    tag: "Backend",
+    title: "Python & FastAPI",
     description:
-      "We dig deep into data, culture, and human behavior to surface the insights that drive meaningful, lasting change.",
+      "Real-time APIs, WebSocket pipelines, microservices architecture, Keycloak auth, PostgreSQL, Redis, InfluxDB — built for high-throughput production environments.",
+    href: "#projects",
   },
   {
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260324_151826_c7218672-6e92-402c-9e45-f1e0f454bdc4.mp4",
-    tag: "Craft",
-    title: "Design & Execution",
+    tag: "Full Stack",
+    title: "Next.js & React",
     description:
-      "From concept to launch, we obsess over every detail to deliver experiences that feel effortless and look extraordinary.",
+      "Responsive dashboards, trading panels, and enterprise UIs using Next.js, TypeScript, TradingView Charts, FullCalendar, and event-driven real-time state management.",
+    href: "#projects",
   },
 ];
 
@@ -28,7 +30,7 @@ export default function ServicesSection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative bg-black py-28 md:py-40 px-6 overflow-hidden">
+    <section id="projects" className="relative bg-black py-28 md:py-40 px-6 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -44,9 +46,9 @@ export default function ServicesSection() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-3xl md:text-5xl text-white tracking-tight">
-            What we do
+            What I do
           </h2>
-          <p className="text-white/40 text-sm hidden md:block">Our services</p>
+          <p className="text-white/40 text-sm hidden md:block">Core skills</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -75,9 +77,9 @@ export default function ServicesSection() {
                   <span className="uppercase tracking-widest text-white/40 text-xs">
                     {card.tag}
                   </span>
-                  <button className="liquid-glass rounded-full p-2">
+                  <a href={card.href} className="liquid-glass rounded-full p-2">
                     <ArrowUpRight size={16} className="text-white" />
-                  </button>
+                  </a>
                 </div>
                 <h3 className="text-white text-xl md:text-2xl mb-3 tracking-tight">
                   {card.title}
@@ -89,6 +91,68 @@ export default function ServicesSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Projects listing */}
+        <motion.div
+          className="mt-20 md:mt-28"
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p className="text-white/40 text-xs tracking-widest uppercase mb-10">
+            Featured Projects
+          </p>
+          <div className="space-y-0">
+            {[
+              {
+                name: "TrendEdge",
+                stack: "Python · FastAPI · Next.js · Socket.IO · Zerodha API · PostgreSQL",
+                desc: "Real-time trading & automation platform — Supertrend signals, automated strike selection, sub-second data streaming.",
+              },
+              {
+                name: "SpaceTime",
+                stack: "Python · FastAPI · Redis · InfluxDB · PostgreSQL · Microservices · TradingView Charts",
+                desc: "Market data platform ingesting 10,000+ ticks/sec from DTN live feed with Redis Pub/Sub and multi-chart event bus.",
+              },
+              {
+                name: "Company Management System",
+                stack: "Python · FastAPI · Next.js · Keycloak · PostgreSQL",
+                desc: "Enterprise platform covering project management, finance, invoicing, expense tracking, and RBAC via Keycloak.",
+              },
+              {
+                name: "Delta Exchange Automation",
+                stack: "Python · FastAPI · WebSockets · Telegram Bot · Delta Exchange API",
+                desc: "Multi-symbol automated trading system with real-time monitoring, signal processing, and Telegram alerts.",
+              },
+            ].map((project, i) => (
+              <div
+                key={project.name}
+                className="group flex flex-col md:flex-row md:items-center justify-between py-7 border-t border-white/10 hover:border-white/20 transition-colors"
+              >
+                <div className="flex items-start gap-6">
+                  <span className="text-white/20 text-sm tabular-nums mt-1 shrink-0">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h4 className="text-white text-lg md:text-xl tracking-tight mb-1 group-hover:text-white/80 transition-colors">
+                      {project.name}
+                    </h4>
+                    <p className="text-white/30 text-xs tracking-wide mb-2">
+                      {project.stack}
+                    </p>
+                    <p className="text-white/50 text-sm leading-relaxed max-w-lg">
+                      {project.desc}
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight
+                  size={20}
+                  className="text-white/20 group-hover:text-white/60 transition-colors mt-4 md:mt-0 shrink-0"
+                />
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

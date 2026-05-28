@@ -8,7 +8,7 @@ export default function AboutSection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative bg-black pt-32 md:pt-44 pb-10 md:pb-14 px-6 overflow-hidden">
+    <section id="about" className="relative bg-black pt-32 md:pt-44 pb-10 md:pb-14 px-6 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -23,7 +23,7 @@ export default function AboutSection() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          About Us
+          About Me
         </motion.p>
         <motion.h2
           className="text-4xl md:text-6xl lg:text-7xl text-white leading-[1.1] tracking-tight"
@@ -31,21 +31,21 @@ export default function AboutSection() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          Pioneering{" "}
+          Turning complex{" "}
           <em
             className="italic text-white/60"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            ideas
+            problems
           </em>{" "}
-          for{" "}
+          into{" "}
           <br className="hidden md:block" />
-          minds that{" "}
+          systems that{" "}
           <em
             className="italic text-white/60"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            create, build, and inspire.
+            scale, perform, and last.
           </em>
         </motion.h2>
       </div>

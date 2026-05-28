@@ -28,26 +28,28 @@ export default function FeaturedVideoSection() {
             preload="auto"
             src={VIDEO_URL}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
               <div className="liquid-glass rounded-2xl p-6 md:p-8 max-w-md">
                 <p className="text-white/50 text-xs tracking-widest uppercase mb-3">
-                  Our Approach
+                  Professional Background
                 </p>
                 <p className="text-white text-sm md:text-base leading-relaxed">
-                  We believe in the power of curiosity-driven exploration. Every
-                  project starts with a question, and every answer opens a new
-                  door to innovation.
+                  Software Developer at Secret Weapon Trading Solution — building
+                  real-time fintech systems processing 10,000+ ticks/sec, REST
+                  APIs, WebSocket pipelines, and Keycloak-secured microservices
+                  on AWS.
                 </p>
               </div>
-              <motion.button
+              <motion.a
+                href="#projects"
                 className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Explore more
-              </motion.button>
+                View projects
+              </motion.a>
             </div>
           </div>
         </motion.div>
