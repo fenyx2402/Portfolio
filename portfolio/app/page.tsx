@@ -1,17 +1,17 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ContactSection from "@/components/ContactSection";
+import FeaturedVideoSection from "@/components/FeaturedVideoSection";
+import PhilosophySection from "@/components/PhilosophySection";
+import ServicesSection from "@/components/ServicesSection";
 
 export default function Home() {
   return (
     <main className="bg-black">
       <HeroSection />
       <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
+      <FeaturedVideoSection />
+      <PhilosophySection />
+      <ServicesSection />
     </main>
   );
 }
