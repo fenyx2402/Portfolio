@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { Globe, ArrowRight, Instagram, Twitter } from "lucide-react";
+import { Globe, ArrowRight, Camera, Share2 } from "lucide-react";
 
 const VIDEO_URL =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4";
@@ -146,13 +146,13 @@ export default function HeroSection() {
           aria-label="Instagram"
           className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
         >
-          <Instagram size={20} />
+          <Camera size={20} />
         </button>
         <button
           aria-label="Twitter"
           className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
         >
-          <Twitter size={20} />
+          <Share2 size={20} />
         </button>
         <button
           aria-label="Globe"
