@@ -23,6 +23,7 @@ export const projects: Project[] = [
     tagline: "A full-stack lab management platform with WhatsApp notifications, Keycloak auth, and real-time patient tracking.",
     category: "Enterprise Platform",
     status: "live",
+    liveUrl: "https://lab.fenyxn.in",
     githubUrl: "https://github.com/Fenyxn/Laboratory-Management-System",
     stack: [
       "Python", "FastAPI", "Next.js", "TypeScript",
